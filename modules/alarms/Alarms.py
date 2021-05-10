@@ -235,4 +235,3 @@ class Alarms:
 		
 		message += "Please look at the affected host(s)"
 		return message
-

@@ -1,5 +1,5 @@
 """
-jaiwardhan/Raspimon
+jaiwardhan/raspimon
 
 Simple host metric capture and alerting tool for Raspberry Pi.
 Collect metrics, define thresholds and extend tool capabilities
@@ -12,7 +12,7 @@ performance alerts into your Channel. Plug it to a cron or an
 OpenMediaVault NAS server job without having to periodically
 run htop.
 
-@author: Jaiwardhan Swarnakar, 2021
+@author: Jaiwardhan Swarnakar
 Copyright 2021-present
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -26,19 +26,11 @@ limitations under the License.
 
 """
 
-import psutil
-import os
-import json
-import time
-import platform
-import sys
-
 from modules.comms.TelegramRelay import PiMonBot
 from modules.logger.Logger import Logger
 from modules.utils.HostStats import HostStats
 from modules.alarms.Alarms import Alarms
 from modules.storage.Storage import Storage
-
 
 # ------------------------------------------------ MAIN exec --
 if __name__ == "__main__":
