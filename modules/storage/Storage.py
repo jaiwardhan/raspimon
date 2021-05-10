@@ -29,6 +29,7 @@ class Storage:
 	live = {}
 
 	KEY_TELEMETRY = "telemetry"
+	KEY_PROCESS = "process"
 	KEY_VALUES = "values"
 	KEY_VALUE = "value"
 	KEY_MOVING_AVG = "mavg"
@@ -76,7 +77,7 @@ class Storage:
 				Storage.KEY_MOVING_AVG: 0.0,
 				Storage.KEY_LAST_UPD: 0
 			}
-		
+
 		# Add the value with ts to the buffer
 		Storage.live[Storage.KEY_TELEMETRY][telemetry_type][Storage.KEY_VALUES].append({
 			Storage.KEY_VALUE: value,
@@ -86,15 +87,45 @@ class Storage:
 		# Prune if overflow
 		if len(Storage.live[Storage.KEY_TELEMETRY][telemetry_type][Storage.KEY_VALUES]) > Storage.CONST_VALUE_MAXVALUES:
 			Storage.live[Storage.KEY_TELEMETRY][telemetry_type][Storage.KEY_VALUES].pop(0)
-		
+
 		# Re-calc moving avg
 		_avg = 0.0
 		for each_val in Storage.live[Storage.KEY_TELEMETRY][telemetry_type][Storage.KEY_VALUES]:
 			_avg += (1.0* each_val[Storage.KEY_VALUE])
 		Storage.live[Storage.KEY_TELEMETRY][telemetry_type][Storage.KEY_MOVING_AVG] = _avg / len(Storage.live[Storage.KEY_TELEMETRY][telemetry_type][Storage.KEY_VALUES])
-		
+
 		# Last TS update
 		Storage.live[Storage.KEY_TELEMETRY][telemetry_type][Storage.KEY_LAST_UPD] = int(time.time())
-		
+
+		# Sync
+		Storage.flush()
+
+	@staticmethod
+	def add_process_telemetry(telemetry_type, value):
+		"""Add a process telemetry metric to the storage. Additionally maintain
+		timestamps with overflow purging"""
+		if Storage.live is None or len(Storage.live.keys()) == 0:
+			Storage.refresh()
+		if Storage.KEY_PROCESS not in Storage.live:
+			Storage.live[Storage.KEY_PROCESS] = {}
+		if telemetry_type not in Storage.live[Storage.KEY_PROCESS]:
+			Storage.live[Storage.KEY_PROCESS][telemetry_type] = {
+				Storage.KEY_VALUES: [],
+				Storage.KEY_LAST_UPD: 0
+			}
+
+		# Add the value with ts to the buffer
+		Storage.live[Storage.KEY_PROCESS][telemetry_type][Storage.KEY_VALUES].append({
+			Storage.KEY_VALUE: value,
+			Storage.KEY_TS: int(time.time())
+		})
+
+		# Prune if overflow
+		if len(Storage.live[Storage.KEY_PROCESS][telemetry_type][Storage.KEY_VALUES]) > Storage.CONST_VALUE_MAXVALUES:
+			Storage.live[Storage.KEY_PROCESS][telemetry_type][Storage.KEY_VALUES].pop(0)
+
+		# Last TS update
+		Storage.live[Storage.KEY_PROCESS][telemetry_type][Storage.KEY_LAST_UPD] = int(time.time())
+
 		# Sync
 		Storage.flush()

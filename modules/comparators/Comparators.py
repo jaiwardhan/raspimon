@@ -80,12 +80,12 @@ class ServiceComparator:
 	"""
 
 	@staticmethod
-	def up(name):
-		pass
+	def up(state):
+		return str(state) == "up"
 
 	@staticmethod
-	def down(name):
-		pass
+	def down(state):
+		return str(state) == "down"
 
 	@staticmethod
 	def __get_map():
