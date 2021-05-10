@@ -9,3 +9,4 @@ sudo sed -s "s/TELEGRAM_CHANNEL_ID/$2/g" /tmp/raspimon_profile.sh > /etc/profile
 # Copy the service file
 sudo cp ./scripts/raspimon /etc/init.d/
 sudo systemctl enable raspimon
+chmod +x run.sh
