@@ -46,7 +46,7 @@ class ConfigLoader:
 			not os.path.isfile(ConfigLoader.Alarms["base_path"]):
 			Errors.throw(
 				category=Errors.Categories.ILLEGAL,
-				type=Errors.Types.RESOURCE_MISSING,
+				error_type=Errors.Types.RESOURCE_MISSING,
 				msg="Missing config at path " + ConfigLoader.Alarms["base_path"]
 			)
 		
@@ -65,7 +65,7 @@ class ConfigLoader:
 			not os.path.isfile(ConfigLoader.Telemetry["base_path"]):
 			Errors.throw(
 				category=Errors.Categories.ILLEGAL,
-				type=Errors.Types.RESOURCE_MISSING,
+				error_type=Errors.Types.RESOURCE_MISSING,
 				msg="Missing telemetry data at path " + ConfigLoader.Telemetry["base_path"]
 			)
 		
