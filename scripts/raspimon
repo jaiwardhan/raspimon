@@ -1,6 +1,12 @@
 #!/bin/bash
-# chkconfig: 2345 20 80
-# description: Description comes here....
+### BEGIN INIT INFO
+# Provides:          raspimon
+# Required-Start:    $all
+# Required-Stop:
+# Default-Start:     2 3 4 5
+# Default-Stop:
+# Short-Description: Raspimon service to ensure that certain resources are present at boot
+### END INIT INFO
 
 start() {
     mkdir -p /var/log/raspimon
