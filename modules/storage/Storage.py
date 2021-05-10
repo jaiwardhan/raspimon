@@ -41,6 +41,12 @@ class Storage:
 	def refresh():
 		"""Refresh the storage contents back from the disk to memory"""
 		# Create database if not exists
+		if  not os.path.exists(ConfigLoader.Telemetry["base_dir"]):
+			os.mkdir(ConfigLoader.Telemetry["base_dir"])
+		elif not os.path.isdir(ConfigLoader.Telemetry["base_dir"]):
+			os.remove(ConfigLoader.Telemetry["base_dir"])
+			os.mkdir(ConfigLoader.Telemetry["base_dir"])
+
 		if  not os.path.exists(ConfigLoader.Telemetry["base_path"]) or \
 			not os.path.isfile(ConfigLoader.Telemetry["base_path"]):
 			with open(ConfigLoader.Telemetry["base_path"], "w+") as storage_file:

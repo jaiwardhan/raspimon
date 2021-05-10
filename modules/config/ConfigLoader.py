@@ -32,6 +32,7 @@ class ConfigLoader:
 	}
 
 	Telemetry = {
+		"base_dir": "storage",
 		"base_path": "storage/monitoring_telemetry.json",
 		"config": {}
 	}

@@ -15,7 +15,7 @@ class Errors:
     Types = ErrorTypes
     Categories = ErrorCategories
 
-    def __init__(self, msg, category = Errors.Categories.ILLEGAL, error_type = Errors.Types.RESOURCE_MISSING):
+    def __init__(self, msg, category = ErrorCategories.ILLEGAL, error_type = ErrorTypes.RESOURCE_MISSING):
         self.category = category
         self.error_type = error_type
         self.msg = msg
