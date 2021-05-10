@@ -28,7 +28,6 @@ limitations under the License.
 
 from modules.comms.TelegramRelay import PiMonBot
 from modules.logger.Logger import Logger
-from modules.utils.HostStats import HostStats
 from modules.alarms.Alarms import Alarms
 from modules.storage.Storage import Storage
 
@@ -38,8 +37,7 @@ if __name__ == "__main__":
 	Storage.refresh()
 	Alarms.init()
 
-	system_statistics = HostStats.get()
-	alarms = Alarms.check( stats=system_statistics )
+	alarms = Alarms.check()
 	# print(PiAlarms.summarize( alarms=alarms ))
 	if alarms is not None and len(alarms) > 0:
 		PiMonBot.send(msg=Alarms.summarize( 
