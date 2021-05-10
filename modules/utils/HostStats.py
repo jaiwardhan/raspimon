@@ -69,4 +69,9 @@ class HostStats:
     
     @staticmethod
     def platform():
+        """Get the host platform - generally the `hostname`
+
+        Returns:
+            str: Generally the `hostname` of the host
+        """
         return platform.node()

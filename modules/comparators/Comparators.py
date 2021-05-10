@@ -16,7 +16,7 @@ limitations under the License.
 """
 
 class NumericComparator:
-	"""Common numeric comparators for easy reference via codes
+	"""Provides common numeric comparators for easy reference via codes
 	"""
 
 	@staticmethod
@@ -49,26 +49,35 @@ class NumericComparator:
 			"geq": NumericComparator.geq
 		}
 
-	"""Gets the most appropriate comparator based on the code
-
-	Returns:
-		func: Reference to the eligible comparator
-	"""
 	@staticmethod
 	def get(code):
+		"""Gets the most appropriate comparator based on the code
+
+		Args:
+			code (str): The code corresponding to the comparator being
+			looked upon.
+
+		Returns:
+			func: Reference to the eligible comparator
+		"""
 		cnc_map = NumericComparator.__get_map()
 		return cnc_map[str(code)] if str(code) in cnc_map else NumericComparator.eq
 	
-	"""Check the passed code is supported by this comparator
-
-	Returns:
-		boolean: True if supported | False otherwise
-	"""
 	@staticmethod
 	def supported(code):
+		"""Check the passed code is supported by this comparator
+
+		Args:
+			code (str): The code being checked for its support
+
+		Returns:
+			boolean: True if supported | False otherwise
+		"""
 		return str(code) in NumericComparator.__get_map()
 
 class ServiceComparator:
+	"""Provides compartors for a service's status via codes
+	"""
 
 	@staticmethod
 	def up(name):
@@ -87,9 +96,26 @@ class ServiceComparator:
 	
 	@staticmethod
 	def get(code):
+		"""Get the most appropriate service comparator based on the code
+
+		Args:
+			code (str): The code corresponding to the comparator being
+			looked upon.
+
+		Returns:
+			func: Reference to the eligible comparator
+		"""
 		cssc_map = ServiceComparator.__get_map()
 		return cssc_map[str(code)] if str(code) in cssc_map else ServiceComparator.up
 	
 	@staticmethod
 	def supported(code):
+		"""Check the passed code is supported by this comparator
+
+		Args:
+			code (str): The code being checked for its support
+
+		Returns:
+			boolean: True if supported | False otherwise
+		"""
 		return str(code) in ServiceComparator.__get_map()

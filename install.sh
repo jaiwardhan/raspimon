@@ -1,5 +1,11 @@
 #!/bin/bash
 
+####################################################
+# jaiwardhan/raspimon
+#
+# Installs raspimon service, embed environment vars.
+####################################################
+
 set -e
 
 # Replace bot tokens

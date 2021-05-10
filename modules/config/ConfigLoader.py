@@ -20,6 +20,8 @@ import json
 import os
 
 class ConfigLoader:
+	"""Central manager to load configurations from disk into memory
+	"""
 
 	Alarms = {
 		"base_path": "configs/alarms.json",
@@ -39,6 +41,11 @@ class ConfigLoader:
 
 	@staticmethod
 	def load_alarms():
+		"""Helper to load alarms configuration. No validation is done.
+
+		Returns:
+			dict: KV dict derived from the JSON configuration for this structure
+		"""
 		alarms = ""
 		contents = ""
 
@@ -58,6 +65,11 @@ class ConfigLoader:
 	
 	@staticmethod
 	def load_telemetry():
+		"""Helper to load telemetry stats. No validation is done.
+
+		Returns:
+			dict: KV dict derived from the JSON storage for this structure
+		"""
 		telemetry_data = {}
 		contents = ""
 

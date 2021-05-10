@@ -26,6 +26,11 @@ class Logger:
 	
 	@staticmethod
 	def execution_log(started = True):
+		"""Log that a program execution has started/stopped to `raspimon` logs
+
+		Args:
+			started (bool, optional): Set `True` on start, `False` on terminate. Defaults to True.
+		"""
 		dateTimeObj = datetime.now()
 		timestampStr = dateTimeObj.strftime("%d-%b-%Y (%H:%M:%S.%f)")
 		msg = " - " + timestampStr + " -- " + "Execution " + ("started" if started else "finished")

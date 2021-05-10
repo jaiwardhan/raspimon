@@ -1,6 +1,10 @@
 #!/bin/bash
 
-# Raspimon monitor hook. Requires python3
+####################################################
+# jaiwardhan/raspimon
+#
+# Raspimon run hook trigger.
+####################################################
 
 PWD_TRIGGER=$(pwd)
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
