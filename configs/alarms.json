@@ -1,5 +1,5 @@
 {
-	"alarms": {
+	"host": {
         "cpu": {
             "name": "CPU Utilization Alarm",
             "thresholds": [{
@@ -19,15 +19,17 @@
                 "threshold": 70,
                 "trend": "geq"
             }]
-        },
+        }
+    },
+    "services": {
         "omv": {
             "name": "OpenMediaVault NAS service alarm",
+            "process": "omv-engined",
             "thresholds": [{
                 "consecutive": 2,
                 "description": "OpenMediaVault NAS service is down",
-                "interval": 300,
-                "process": "omv-engined",
-                "state": "up"
+                "interval": 150,
+                "state": "down"
             }]
         }
     }
