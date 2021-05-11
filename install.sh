@@ -18,4 +18,4 @@ sudo systemctl enable raspimon
 chmod +x run.sh
 
 # Install package requirements
-sudo pip3 install -r requirements.txt
+sudo -H pip install --ignore-installed -U -r requirements.txt
