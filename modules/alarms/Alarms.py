@@ -279,14 +279,16 @@ class Alarms:
 		If yes, then append an alarm object to the list which can be 
 		used further.
 		"""
-		for each_telemetry_type in Storage.live[Storage.KEY_PROCESSESES]:
+		for each_process_alarm in Alarms.config[Alarms.KEY_PROCESSESES].keys():
+			process_name = Alarms.config[Alarms.KEY_PROCESSESES][each_process_alarm]
 			# Skip if this telemetry is not being tracked anymore
-			if each_telemetry_type not in Alarms.config[Alarms.KEY_PROCESSESES]:
+			if process_name not in Storage.live[Storage.KEY_PROCESSESES]:
 				continue
+			process_alarm = Alarms.config[Alarms.KEY_PROCESSESES][each_process_alarm]
 
-			telemetry_name = Alarms.config[Alarms.KEY_PROCESSESES][each_telemetry_type][Alarms.KEY_NAME]
-			thresholds = Alarms.config[Alarms.KEY_PROCESSESES][each_telemetry_type][Alarms.KEY_THRESHOLDS]
-			telemetry_values = Storage.live[Storage.KEY_PROCESSESES][each_telemetry_type][Storage.KEY_VALUES]
+			telemetry_name = process_alarm[Alarms.KEY_NAME]
+			thresholds = process_alarm[Alarms.KEY_THRESHOLDS]
+			telemetry_values = Storage.live[Storage.KEY_PROCESSESES][each_process_alarm][Storage.KEY_VALUES]
 
 			for each_threshold in thresholds:
 				threshold_desc = each_threshold[Alarms.KEY_DESC]

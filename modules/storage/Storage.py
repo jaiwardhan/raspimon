@@ -85,7 +85,7 @@ class Storage:
 		})
 
 		# Prune if overflow
-		if len(Storage.live[Storage.KEY_TELEMETRY][telemetry_type][Storage.KEY_VALUES]) > Storage.CONST_VALUE_MAXVALUES:
+		while len(Storage.live[Storage.KEY_TELEMETRY][telemetry_type][Storage.KEY_VALUES]) > Storage.CONST_VALUE_MAXVALUES:
 			Storage.live[Storage.KEY_TELEMETRY][telemetry_type][Storage.KEY_VALUES].pop(0)
 
 		# Re-calc moving avg
@@ -121,7 +121,7 @@ class Storage:
 		})
 
 		# Prune if overflow
-		if len(Storage.live[Storage.KEY_PROCESSESES][telemetry_type][Storage.KEY_VALUES]) > Storage.CONST_VALUE_MAXVALUES:
+		while len(Storage.live[Storage.KEY_PROCESSESES][telemetry_type][Storage.KEY_VALUES]) > Storage.CONST_VALUE_MAXVALUES:
 			Storage.live[Storage.KEY_PROCESSESES][telemetry_type][Storage.KEY_VALUES].pop(0)
 
 		# Last TS update
