@@ -16,6 +16,7 @@ limitations under the License.
 """
 
 from modules.errors.Errors import Errors
+from modules.utils.Tools import YamlToJSON
 import json
 import os
 
@@ -24,7 +25,7 @@ class ConfigLoader:
 	"""
 
 	Alarms = {
-		"base_path": "configs/alarms.json",
+		"base_path": "configs/alarms.yaml",
 		"config": {}
 	}
 
@@ -47,7 +48,6 @@ class ConfigLoader:
 			dict: KV dict derived from the JSON configuration for this structure
 		"""
 		alarms = ""
-		contents = ""
 
 		if not os.path.exists(ConfigLoader.Alarms["base_path"]) or\
 			not os.path.isfile(ConfigLoader.Alarms["base_path"]):
@@ -57,9 +57,7 @@ class ConfigLoader:
 				msg="Missing config at path " + ConfigLoader.Alarms["base_path"]
 			)
 		
-		with open(ConfigLoader.Alarms["base_path"]) as f:
-			contents = f.read()
-		alarms = json.loads(contents)
+		alarms = YamlToJSON.convert_file(ConfigLoader.Alarms["base_path"])
 		ConfigLoader.Alarms["config"] = alarms
 		return alarms
 	

@@ -1,0 +1,31 @@
+host:
+  cpu:
+    name: "CPU Utilization Alarm"
+    thresholds:
+      -
+        consecutive: 2,
+        description: "CPU Utilization has gone above threshold limit"
+        interval: 300
+        threshold: 70
+        trend: "geq"
+  
+  mem:
+    name: "Memory Utilization alarm"
+    thresholds:
+      -
+        consecutive: 2
+        description: "Memory Utilization has gone above threshold limit"
+        interval: 300
+        threshold: 70
+        trend: "geq"
+
+processes:
+  omv:
+    name: "OpenMediaVault NAS service alarm"
+    process: "omv-engined"
+    thresholds:
+      -
+        consecutive: 2
+        description: "OpenMediaVault NAS service is down"
+        interval: 150
+        state: "down"
