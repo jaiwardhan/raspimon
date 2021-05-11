@@ -47,8 +47,11 @@ When a configuration error is encountered - missing `,` or illegal/missing value
 ![Validation error SS](assets/validation_error.png "Validation error")
 
 ### Critical Alert
-When a breach happens to one or more of your defined thresholds, an Alarm notification is issued as well
+When a host breach happens to one or more of your defined thresholds, an Alarm notification is issued.
 ![Critical Alert SS](assets/alert.png "Critical Alert")
+
+When a process breach happens to one or more of your defined thresholds, an Alarm notification is issued.
+![Process Alert SS](assets/alert_process.png "Critical Alert")
 
 ### Hooking up to OpenMediaVault
 If you have setup your Raspberry Pi to act as VPN or as your custom NAS and you are using `OpenMediaVault` you can hook this tool under the `Scheduled Jobs` interface to run every 2 minutes somewhat like this:
