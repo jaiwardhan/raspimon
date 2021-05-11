@@ -106,26 +106,26 @@ class Storage:
 		timestamps with overflow purging"""
 		if Storage.live is None or len(Storage.live.keys()) == 0:
 			Storage.refresh()
-		if Storage.KEY_PROCESSES not in Storage.live:
-			Storage.live[Storage.KEY_PROCESSES] = {}
-		if telemetry_type not in Storage.live[Storage.KEY_PROCESSES]:
-			Storage.live[Storage.KEY_PROCESSES][telemetry_type] = {
+		if Storage.KEY_PROCESSESES not in Storage.live:
+			Storage.live[Storage.KEY_PROCESSESES] = {}
+		if telemetry_type not in Storage.live[Storage.KEY_PROCESSESES]:
+			Storage.live[Storage.KEY_PROCESSESES][telemetry_type] = {
 				Storage.KEY_VALUES: [],
 				Storage.KEY_LAST_UPD: 0
 			}
 
 		# Add the value with ts to the buffer
-		Storage.live[Storage.KEY_PROCESSES][telemetry_type][Storage.KEY_VALUES].append({
+		Storage.live[Storage.KEY_PROCESSESES][telemetry_type][Storage.KEY_VALUES].append({
 			Storage.KEY_VALUE: value,
 			Storage.KEY_TS: int(time.time())
 		})
 
 		# Prune if overflow
-		if len(Storage.live[Storage.KEY_PROCESSES][telemetry_type][Storage.KEY_VALUES]) > Storage.CONST_VALUE_MAXVALUES:
-			Storage.live[Storage.KEY_PROCESSES][telemetry_type][Storage.KEY_VALUES].pop(0)
+		if len(Storage.live[Storage.KEY_PROCESSESES][telemetry_type][Storage.KEY_VALUES]) > Storage.CONST_VALUE_MAXVALUES:
+			Storage.live[Storage.KEY_PROCESSESES][telemetry_type][Storage.KEY_VALUES].pop(0)
 
 		# Last TS update
-		Storage.live[Storage.KEY_PROCESSES][telemetry_type][Storage.KEY_LAST_UPD] = int(time.time())
+		Storage.live[Storage.KEY_PROCESSESES][telemetry_type][Storage.KEY_LAST_UPD] = int(time.time())
 
 		# Sync
 		Storage.flush()
