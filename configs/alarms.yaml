@@ -3,7 +3,7 @@ host:
     name: "CPU Utilization Alarm"
     thresholds:
       -
-        consecutive: 2,
+        consecutive: 2
         description: "CPU Utilization has gone above threshold limit"
         interval: 300
         threshold: 70
