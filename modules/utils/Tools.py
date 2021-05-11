@@ -15,7 +15,7 @@ class YamlToJSON:
         try:
             converted_json = {}
             with open(str(with_path)) as yamlfile:
-                converted_json = yaml.load(yamlfile, Loader=yaml.FullLoader)
+                converted_json = yaml.load(yamlfile)
         except:
             converted_json = {}
         if to_path and not os.path.isdir(to_path):
