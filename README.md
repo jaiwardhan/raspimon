@@ -8,48 +8,34 @@ This tool can be hooked via a cron and frequency tuned to your choice. If using 
 - If using Telegram - BOT ID and Channel ID
 - If your host doesn't already have these packages, run `pip3` with the supplied `requirements.txt` to install all dependencies.
 
-## Usage
-Expose your BOT ID via `PI_BOT_TOKEN` environment variable. Similarly expose your Channel ID via `PI_CHANNEL_ID` environment variable.
+## Installation
+Download the project and extract at a location of your choice and `cd` inside the project. First, tune your alerts. The alarms config is a `yaml` located at `configs/alarms.yaml`. For config rules see the [Alert Tuning](configs/README.md) section.
 
-Tune your alerts. The default config comes with `cpu` and `mem` status alarms which looks somewhat like this:
-```json
-{
-	"alarms": {
-        "cpu": {
-            "name": "CPU Utilization Alarm",
-            "thresholds": [{
-                "consecutive": 2,
-                "description": "CPU Utilization has gone above threshold limit",
-                "interval": 300,
-                "threshold": 70,
-                "trend": "geq"
-            }]
-        },
-        "mem": {
-            "name": "Memory Utilization alarm",
-            "thresholds": [{
-                "consecutive": 2,
-                "description": "Memory Utilization has gone above threshold limit",
-                "interval": 300,
-                "threshold": 70,
-                "trend": "geq"
-            }]
-        }
-    }
-}
+> _By default the alarms comes with basic host metric monitoring like cpu and memory, as well as `omv-engined` process monitoring (the process being OpenMediaVault). You can add more `thresholds` to the alarm to configure at different buckets levels (eg. `Warning`, `Critical` etc.)_
+
+### Make
+We will use `make` to do the initial setup. Assuming your Bot Token is `MYVERYLONGBOTTOKEN`, your Channel Id is `-100101010101` **and** you have `sudo` privilege hit the following command:
+
+```bash
+raspimon $: sudo make BOT_TOKEN=MYVERYLONGBOTTOKEN CHANNEL_ID=-100101010101 install
 ```
 
-You can set multiple thresholds per dimension for a mix-and-match result. As can be seen above, the CPU alarm will go off if the utilization breaches the `70%` mark (greater-than-or-equal-to `geq`) consecutively `2` times within a span of `300` seconds. Same goes for memory. 
+> _We need `sudo` to properly set system wide environment variable. Its written to `/etc/profile.d/raspimon.sh`_
 
-Bear in mind that certain fields like `name`, `description`, legal `trend` values and `threshold` need to be stated mandatorily. This is to ensure that the config remains sound enough without having to scan through the code. Missing any of them will result in immediate abort. If adding any custom alarm apart from `"cpu"` and `"mem"`, ensure that the same name is exposed via `PiAlarms.get_stats` method. Else they would be simply ignored. Validation will still continue during initialization phase itself.
+Once done, `raspimon` is ready to be triggered by your best preferred method - `cron`s or UI based jobs.
 
 ### Triggers
-Manually trigger the tool by running:
-```bash
-$: python3 monitor.py
-```
+Raspimon can be manually triggered:
+- with Python3 
+    ```bash
+    $: sudo python3 raspimon.py
+    ```
+- with Bash
+    ```bash
+    $: sudo run.sh
+    ```
 
-Or hook the supplied bash `monitor.sh` with `+x` `chmod` permissions to your tools or cron.
+Or the supplied run script `run.sh` can be hooked with `+x` `chmod` permissions to your tool or cron.
 
 <hr/>
 
@@ -74,4 +60,8 @@ If you have setup your Raspberry Pi to act as VPN or as your custom NAS and you 
 - Slack hooks support
 
 :shipit:
+<hr>
+
+> (c) _jaiwardhan/raspimon_
+
 
