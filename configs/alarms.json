@@ -21,7 +21,7 @@
             }]
         }
     },
-    "services": {
+    "processes": {
         "omv": {
             "name": "OpenMediaVault NAS service alarm",
             "process": "omv-engined",

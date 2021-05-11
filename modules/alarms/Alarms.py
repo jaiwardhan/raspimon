@@ -36,6 +36,7 @@ class Alarms:
 	config = {}
 
 	KEY_HOST = "host"
+	KEY_PROCESSESES = "processes"
 	KEY_SERVICES = "services"
 	KEY_NAME = "name"
 	KEY_THRESHOLDS = "thresholds"
@@ -107,10 +108,10 @@ class Alarms:
 									error_type=Errors.Types.UNRECOGNIZED
 								))
 
-		"""Validate: Service alarms"""
-		if Alarms.config is not None and Alarms.KEY_SERVICES in Alarms.config:
-			for alarm_name in Alarms.config[Alarms.KEY_SERVICES].keys():
-				each_alarm = Alarms.config[Alarms.KEY_SERVICES][alarm_name]
+		"""Validate: Process alarms"""
+		if Alarms.config is not None and Alarms.KEY_PROCESSESES in Alarms.config:
+			for alarm_name in Alarms.config[Alarms.KEY_PROCESSESES].keys():
+				each_alarm = Alarms.config[Alarms.KEY_PROCESSESES][alarm_name]
 				# Service alarms should contain a name field
 				if Alarms.KEY_NAME not in each_alarm:
 					errors.append(
@@ -165,9 +166,9 @@ class Alarms:
 	@staticmethod
 	def skim_configured_service_alarms():
 		configured_services = []
-		if Alarms.config is not None and Alarms.KEY_SERVICES in Alarms.config:
-			for alarm_name in Alarms.config[Alarms.KEY_SERVICES].keys():
-				each_alarm = Alarms.config[Alarms.KEY_SERVICES][alarm_name]
+		if Alarms.config is not None and Alarms.KEY_PROCESSESES in Alarms.config:
+			for alarm_name in Alarms.config[Alarms.KEY_PROCESSESES].keys():
+				each_alarm = Alarms.config[Alarms.KEY_PROCESSESES][alarm_name]
 				configured_services.append(each_alarm[Alarms.KEY_PROCESS])
 		return configured_services
 
@@ -278,14 +279,14 @@ class Alarms:
 		If yes, then append an alarm object to the list which can be 
 		used further.
 		"""
-		for each_telemetry_type in Storage.live[Storage.KEY_PROCESS]:
+		for each_telemetry_type in Storage.live[Storage.KEY_PROCESSESES]:
 			# Skip if this telemetry is not being tracked anymore
-			if each_telemetry_type not in Alarms.config[Alarms.KEY_PROCESS]:
+			if each_telemetry_type not in Alarms.config[Alarms.KEY_PROCESSESES]:
 				continue
 
-			telemetry_name = Alarms.config[Alarms.KEY_PROCESS][each_telemetry_type][Alarms.KEY_NAME]
-			thresholds = Alarms.config[Alarms.KEY_PROCESS][each_telemetry_type][Alarms.KEY_THRESHOLDS]
-			telemetry_values = Storage.live[Storage.KEY_PROCESS][each_telemetry_type][Storage.KEY_VALUES]
+			telemetry_name = Alarms.config[Alarms.KEY_PROCESSESES][each_telemetry_type][Alarms.KEY_NAME]
+			thresholds = Alarms.config[Alarms.KEY_PROCESSESES][each_telemetry_type][Alarms.KEY_THRESHOLDS]
+			telemetry_values = Storage.live[Storage.KEY_PROCESSESES][each_telemetry_type][Storage.KEY_VALUES]
 
 			for each_threshold in thresholds:
 				threshold_desc = each_threshold[Alarms.KEY_DESC]
