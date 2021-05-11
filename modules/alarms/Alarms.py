@@ -280,7 +280,7 @@ class Alarms:
 		used further.
 		"""
 		for each_process_alarm in Alarms.config[Alarms.KEY_PROCESSESES].keys():
-			process_name = Alarms.config[Alarms.KEY_PROCESSESES][each_process_alarm]
+			process_name = Alarms.config[Alarms.KEY_PROCESSESES][each_process_alarm][Alarms.KEY_PROCESS]
 			# Skip if this telemetry is not being tracked anymore
 			if process_name not in Storage.live[Storage.KEY_PROCESSESES]:
 				continue
