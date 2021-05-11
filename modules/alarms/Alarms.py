@@ -288,7 +288,7 @@ class Alarms:
 
 			telemetry_name = process_alarm[Alarms.KEY_NAME]
 			thresholds = process_alarm[Alarms.KEY_THRESHOLDS]
-			telemetry_values = Storage.live[Storage.KEY_PROCESSESES][each_process_alarm][Storage.KEY_VALUES]
+			telemetry_values = Storage.live[Storage.KEY_PROCESSESES][process_name][Storage.KEY_VALUES]
 
 			for each_threshold in thresholds:
 				threshold_desc = each_threshold[Alarms.KEY_DESC]
